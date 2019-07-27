@@ -68,19 +68,14 @@ void build_ast(list<token>& tokens, list<token>::iterator& cur_it, node& parent_
 
 double eval(node & cur) {
 	switch (cur.tok.t) {
-	case op:
-		return env[cur.tok.s](cur.children);
-	case number:
-		return stod(cur.tok.s);
-	case name:
-		return constants[cur.tok.s];
-	default:
-		return 0.0;
+	case op: return env[cur.tok.s](cur.children);
+	case number: return stod(cur.tok.s);
+	case name: return constants[cur.tok.s];
+	default: return 0.0;
 	}
 }
 
 int main() {
-
 	env["+"] = [](vector<node>& vec)->double {
 		if (!vec.size()) return 0.0;
 		double res = 0.0;
@@ -119,7 +114,6 @@ int main() {
 	cout.precision(9);
 
 	for (;;) {
-	
 		string expr;
 		smatch match;
 		list<token> tokens;
