@@ -29,8 +29,7 @@ using func_type = function <double(vector<node>&)>;
 using environment = unordered_map <string, func_type>;
 environment env;
 node ast;
-unordered_map <string, double> constants = { {"pi", 3.14159265358979323846},
-											{"e", 2.71828182845904523536} };
+unordered_map <string, double> constants = { {"pi", 3.14159265358979323846}, {"e", 2.71828182845904523536} };
 
 void err(const string& msg) {
 	cout << msg << endl;
