@@ -11,7 +11,7 @@ using namespace std;
 
 regex token_pattern(R"((\()|(\))|([a-zA-Z_]\w*)|((?:-?\d+)(?:\.\d+)?)|(\+|\-|\*|\/))",std::regex::ECMAScript | std::regex::icase | std::regex::optimize);
 
-enum token_type { none = 0, left_parenthese = 1, right_parenthese, name, number, op };
+enum token_type { none = 0, left_parenthese, right_parenthese, name, number, op};
 
 struct token {
 	string s = "";
@@ -30,6 +30,7 @@ using environment = unordered_map <string, func_type>;
 environment env;
 node ast;
 unordered_map <string, double> constants = { {"pi", 3.14159265358979323846}, {"e", 2.71828182845904523536} };
+vector<string> table;
 
 void err(const string& msg) {
 	cout << msg << endl;
@@ -127,7 +128,6 @@ int main() {
 					if (match[index].matched) return index;
 				return 0;
 			};
-
 			auto type = find_type();
 			switch (type) {
 			case 0: throw exception(""); break;
