@@ -1,4 +1,4 @@
-# A Simple Script Caculator
+# Tiny Script Caculator
 
 ## Sample
 ```Scheme
