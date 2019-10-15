@@ -9,7 +9,12 @@
 
 using namespace std;
 
-regex token_pattern(R"((\()|(\))|([a-zA-Z_]\w*)|((?:-?\d+)(?:\.\d+)?)|(\+|\-|\*|\/|\^)|(\S+))", std::regex::ECMAScript | std::regex::icase | std::regex::optimize);
+regex token_pattern(
+	R"((\()|(\))|([a-zA-Z_]\w*)|((?:-?\d+)(?:\.\d+)?)|(\+|\-|\*|\/|\^)|(\S+))",
+	regex::ECMAScript
+	| regex::icase
+	| regex::optimize
+);
 
 enum token_type { none = 0, left_parenthese, right_parenthese, name, number, op, wrong };
 
@@ -29,7 +34,10 @@ using func_type = function <double(vector<node>&)>;
 using environment = unordered_map <string, func_type>;
 environment env;
 node ast;
-unordered_map <string, double> constants = { {"pi", std::acos(-1)}, {"e", 2.71828182845904523536} };
+unordered_map <string, double> constants = {
+	{"pi", std::acos(-1)},
+	{"e", 2.71828182845904523536}
+};
 vector<string> table;
 
 void err(const string& msg) {
@@ -160,7 +168,6 @@ int main() {
 		return 0.0;
 	};
 	env["^"] = [](vector<node>& vec)->double {
-		if (!vec.size()) err("at least one parameter is required.");
 		if (vec.size() != 2) err("'^' requires exactly two parameters.");
 		double base = eval(vec[0]);
 		double n = eval(vec[1]);
